@@ -64,7 +64,7 @@ TCL_SCRIPT = 470synth.tcl
 # options for TESTBENCH: ps4_test.sv                   | ps8_test.sv| rps4_test.sv
 TESTBENCH   = mult_test.sv
 SOURCES     = mult_stage.sv pipe_mult.sv
-SYNTH_FILES = and4.vg # P1 NOTE: synthesis is not tested in project 1
+SYNTH_FILES = pipe_mult.vg # P1 NOTE: synthesis is not tested in project 1
 
 # the .vg rule is automatically generated below when the name of the file matches its top level module
 # P1 NOTE: this doesn't work for ps4-assign.sv and ps4-if_else.sv, but you don't need synthesis for P1
