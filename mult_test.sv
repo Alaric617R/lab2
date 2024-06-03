@@ -26,6 +26,7 @@ module testbench();
 	always @(posedge clock)
 		#(`HALF_CYCLE-5) if(!correct) begin 
 			$display("Incorrect at time %4.0f",$time);
+			$display("Time:%4.0f done:%b a:%h b:%h product:%h result:%h",$time,done,a,b,cres,result);
 			$display("cres = %h result = %h",cres,result);
 			$finish;
 		end
@@ -50,7 +51,7 @@ module testbench();
 
 	initial begin
 		$dumpvars;
-		$monitor("Time:%4.0f done:%b a:%h b:%h product:%h result:%h",$time,done,a,b,cres,result);
+		// $monitor("Time:%4.0f done:%b a:%h b:%h product:%h result:%h",$time,done,a,b,cres,result);
 		a=2;
 		b=3;
 		reset=1;
