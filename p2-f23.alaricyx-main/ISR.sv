@@ -6,19 +6,21 @@ module ISR (
     output logic [31:0] result,         
     output logic        done
 );
-
+    // P2 TODO: Finish answering questions for the mult module,
+    //          then implement the Integer Square Root algorithm as specified
+    // P2 NOTE: reset mult_defs.svh to 8 stages when using this module.
     typedef enum logic [2:0]  { START, STORE, COMPUTE_START, COMPUTE_IN, FIN } STATE;
-    logic [4:0]  loop_counter_reg;          
-    logic [4:0]  loop_counter;              
-    logic [63:0] stored_value;              
-    logic [31:0] intermidiate_result;       
-    logic [63:0] multiplier_input;          
-    logic [63:0] squared_data;              
-    logic [2:0]  cur_state;                 
-    logic [2:0]  next_state;                
-    logic        mult_start;                
+    logic [4:0]  loop_counter_reg;          // used in sequential block for storing previous loop_counter
+    logic [4:0]  loop_counter;              // state of calculation, starting from 31, ends at 0
+    logic [63:0] stored_value;              // stored value
+    logic [31:0] intermidiate_result;       // intermediate result stored inside
+    logic [63:0] multiplier_input;          // intermediate result completed to 64-bit
+    logic [63:0] squared_data;              // intermediate result squared
+    logic [2:0]  cur_state;                 // FSM current state
+    logic [2:0]  next_state;                // FSM next state
+    logic        mult_start;                // flag for multiplier
     logic        mult_start_reg;            
-    logic        mult_done;                 
+    logic        mult_done;                 // flag for multiplier finish
 
 
     always_ff @( posedge clock ) begin
