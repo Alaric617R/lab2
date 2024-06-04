@@ -106,8 +106,8 @@ $(BUGGY_ISRS:=_verdi): %_verdi: %_simv novas.rc verdi_dir
 # SOURCES     = ISR.sv mult.sv
 # SYNTH_FILES = ISR.vg
 TESTBENCH   = mult_test.sv
-SOURCES     = mult.sv
-SYNTH_FILES = mult.vg
+SOURCES     = pipe_mult.sv
+SYNTH_FILES = pipe_mult.vg
 # P2 TODO: after testing the mult module clock period, prep the ISR module:
 #          set STAGES to 8 in mult_defs.svh
 #          replace 'mult_test.sv' with 'ISR_test.sv'
