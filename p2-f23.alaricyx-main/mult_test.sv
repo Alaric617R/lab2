@@ -87,7 +87,7 @@ module testbench();
 		// 	start=0;
 		// 	wait_until_done();
 		// end
-		for (i=0;i<60;i=i+1) begin
+		for (int i=0;i<60;i=i+1) begin
 			start=1;
 			a={$random,$random};
 			b={$random,$random};
