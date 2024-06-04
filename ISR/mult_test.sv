@@ -1,6 +1,6 @@
 `define HALF_CYCLE 250
 
-`timescale 1ns/100ps
+
 
 module testbench();
 
