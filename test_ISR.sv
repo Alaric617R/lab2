@@ -1,4 +1,4 @@
-
+`define CLOCK_PERIOD 200
 module testbench();
     logic           reset, clock, done, correct;
     logic [63:0]    value;
@@ -14,14 +14,14 @@ module testbench();
     );
 
 
-    // CLOCK_PERIOD is defined on the commandline by the makefile
+
     always begin
         #(`CLOCK_PERIOD/2.0);
         clock = ~clock;
     end
 
     always @(posedge clock) begin
-        #(`CLOCK_PERIOD*0.2); // a short wait to let signals stabilize
+        #(`CLOCK_PERIOD*0.2); 
         if (!correct) begin
             $display("@@@ Incorrect at time %4.0f", $time);
             $display("@@@ done:%b value:%d result:%d", done, value, result);
@@ -184,4 +184,3 @@ module testbench();
 
 endmodule
 
-// module load vcs verdi synopsys-synth

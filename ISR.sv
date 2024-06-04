@@ -90,4 +90,3 @@ module ISR (
     end
 endmodule
 
-// module load vcs verdi synopsys-synth
