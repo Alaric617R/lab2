@@ -1,4 +1,4 @@
-`define HALF_CYCLE 270
+`define HALF_CYCLE 300
 
 
 
@@ -51,6 +51,7 @@ module testbench();
 
 	initial begin
 		$dumpvars;
+		$display("Starting testbench, clock period: %d",`HALF_CYCLE*2);
 		// $monitor("Time:%4.0f done:%b a:%h b:%h product:%h result:%h",$time,done,a,b,cres,result);
 		a=2;
 		b=3;
