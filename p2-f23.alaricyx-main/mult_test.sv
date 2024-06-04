@@ -1,4 +1,4 @@
-`define HALF_CYCLE 250
+`define HALF_CYCLE 270
 
 
 
