@@ -42,7 +42,7 @@
 
 # P2 TODO: edit this variable, re-synthesize, and run 'make slack' to see generated slack
 # this is a global clock period variable used in the tcl script and referenced in testbenches
-export CLOCK_PERIOD = 19
+export CLOCK_PERIOD = 20
 
 # the Verilog Compiler command and arguments
 VCS = SW_VCS=2020.12-SP2-1 vcs -sverilog +vc -Mupdate -line -full64 -kdb -lca \

@@ -1,4 +1,4 @@
-`define HALF_CYCLE 300
+
 
 
 
@@ -24,7 +24,7 @@ module testbench();
 				.done(done));
 
 	always @(posedge clock)
-		#(`HALF_CYCLE-5) if(!correct) begin 
+		#(`CLOCK_PERIOD*0.2); if(!correct) begin 
 			$display("Incorrect at time %4.0f",$time);
 			$display("Time:%4.0f done:%b a:%h b:%h product:%h result:%h",$time,done,a,b,cres,result);
 			$display("cres = %h result = %h",cres,result);
@@ -32,7 +32,7 @@ module testbench();
 		end
 
 	always begin
-		#`HALF_CYCLE;
+		#(`CLOCK_PERIOD/2.0);
 		clock=~clock;
 	end
 
