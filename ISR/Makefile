@@ -103,7 +103,7 @@ $(BUGGY_ISRS:=_verdi): %_verdi: %_simv novas.rc verdi_dir
 
 # You should only need to modify the following variables in this section:
 TESTBENCH   = test_ISR.sv
-SOURCES     = ISR.sv mult.sv
+SOURCES     = ISR.sv pipe_mult.sv
 SYNTH_FILES = ISR.vg
 # TESTBENCH   = mult_test.sv
 # SOURCES     = pipe_mult.sv
