@@ -114,7 +114,7 @@ SYNTH_FILES = mult.vg
 #          add 'ISR.sv' to SOURCES
 #          repalce 'mult.vg' with 'ISR.vg'
 
-HEADERS = mult_defs.svh
+
 
 # the .vg rule is automatically generated below when the name of the file matches its top level module
 
@@ -125,7 +125,7 @@ DDC_FILES     = mult_stage.ddc
 # see the updated %.vg and %.ddc pattern rules below
 
 # the normal simulation executable will run your testbench on the original modules
-simv: $(TESTBENCH) $(CHILD_SOURCES) $(SOURCES) $(HEADERS)
+simv: $(TESTBENCH) $(CHILD_SOURCES) $(SOURCES) 
 	@$(call PRINT_COLOR, 5, compiling the simulation executable $@)
 	@$(call PRINT_COLOR, 3, NOTE: if this is slow to startup: run '"module load vcs verdi synopsys-synth"')
 	$(VCS) $(TESTBENCH) $(CHILD_SOURCES) $(SOURCES) -o $@
@@ -136,7 +136,7 @@ simv: $(TESTBENCH) $(CHILD_SOURCES) $(SOURCES) $(HEADERS)
 # a make pattern rule to generate the .vg synthesis files
 # pattern rules use the % as a wildcard to match multiple possible targets
 # NOTE: includes CHILD_MODULES and DDC_FILES for hierarchical synthesis
-%.vg: $(SOURCES) $(TCL_SCRIPT) $(DDC_FILES) $(HEADERS)
+%.vg: $(SOURCES) $(TCL_SCRIPT) $(DDC_FILES) 
 	@$(call PRINT_COLOR, 5, synthesizing the $* module)
 	@$(call PRINT_COLOR, 3, this might take a while...)
 	@$(call PRINT_COLOR, 3, NOTE: if this is slow to startup: run '"module load vcs verdi synopsys-synth"')
@@ -146,7 +146,7 @@ simv: $(TESTBENCH) $(CHILD_SOURCES) $(SOURCES) $(HEADERS)
 # this also generates many other files, see the tcl script's introduction for info on each of them
 
 # this rule is similar to the %.vg rule above, but doesn't include CHILD_MODULES or DDC_FILES
-$(DDC_FILES): %.ddc: $(CHILD_SOURCES) $(TCL_SCRIPT) $(HEADERS)
+$(DDC_FILES): %.ddc: $(CHILD_SOURCES) $(TCL_SCRIPT) 
 	@$(call PRINT_COLOR, 5, synthesizing the $* module)
 	@$(call PRINT_COLOR, 3, this might take a while...)
 	@$(call PRINT_COLOR, 3, NOTE: if this is slow to startup: run '"module load vcs verdi synopsys-synth"')
