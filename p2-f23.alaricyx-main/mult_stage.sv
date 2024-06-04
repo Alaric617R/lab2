@@ -1,40 +1,43 @@
+`timescale 1ns/100ps
 
-// This is one stage of an 8 stage pipelined multiplier that multiplies
-// two 64-bit integers and returns the low 64 bits of the result.
-// This is not an ideal multiplier but is sufficient to allow a faster clock
-// period than straight multiplication.
+// This is one stage of an 8 stage (9 depending on how you look at it)
+// pipelined multiplier that multiplies 2 64-bit integers and returns
+// the low 64 bits of the result.  This is not an ideal multiplier but
+// is sufficient to allow a faster clock period than straight *
+module mult_stage(
+					input clock, reset, start,
+					input [63:0] product_in, mplier_in, mcand_in,
 
-`include "mult_defs.svh" // for `STAGES
+					output logic done,
+					output logic [63:0] product_out, mplier_out, mcand_out
+				);
 
-module mult_stage (
-    input clock, reset, start,
-    input [63:0] prev_sum, mplier, mcand,
 
-    output logic [63:0] product_sum, next_mplier, next_mcand,
-    output logic done
-);
 
-    parameter SHIFT = 64/`STAGES;
+	logic [63:0] prod_in_reg, partial_prod_reg;
+	logic [63:0] partial_product, next_mplier, next_mcand;
 
-    logic [63:0] partial_product, shifted_mplier, shifted_mcand;
+	assign product_out = prod_in_reg + partial_prod_reg;
+	assign partial_product = mplier_in[7:0] * mcand_in;
 
-    assign partial_product = mplier[SHIFT-1:0] * mcand;
+	assign next_mplier = {8'b0,mplier_in[63:8]};
+	assign next_mcand = {mcand_in[55:0],8'b0};
 
-    assign shifted_mplier = {SHIFT'('b0), mplier[63:SHIFT]};
-    assign shifted_mcand = {mcand[63-SHIFT:0], SHIFT'('b0)};
+	//synopsys sync_set_reset "reset"
+	always_ff @(posedge clock) begin
+		prod_in_reg      <= product_in;
+		partial_prod_reg <= partial_product;
+		mplier_out       <= next_mplier;
+		mcand_out        <= next_mcand;
+	end
 
-    always_ff @(posedge clock) begin
-        product_sum <= prev_sum + partial_product;
-        next_mplier <= shifted_mplier;
-        next_mcand  <= shifted_mcand;
-    end
-
-    always_ff @(posedge clock) begin
-        if (reset) begin
-            done <= 1'b0;
-        end else begin
-            done <= start;
-        end
-    end
+	// synopsys sync_set_reset "reset"
+	always_ff @(posedge clock) begin
+		if(reset)
+			done <= 1'b0;
+		else
+			done <= start;
+	end
 
 endmodule
+
