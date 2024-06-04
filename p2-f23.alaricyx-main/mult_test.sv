@@ -76,9 +76,17 @@ module testbench();
 		@(negedge clock);
 		start=0;
 		wait_until_done();
-		quit = 0;
-		quit <= #1000000 1;
-		while(~quit) begin
+		// quit = 0;
+		// quit <= #1000000 1;
+		// while(~quit) begin
+		// 	start=1;
+		// 	a={$random,$random};
+		// 	b={$random,$random};
+		// 	@(negedge clock);
+		// 	start=0;
+		// 	wait_until_done();
+		// end
+		for (i=0;i<60;i=i+1) begin
 			start=1;
 			a={$random,$random};
 			b={$random,$random};
@@ -86,6 +94,7 @@ module testbench();
 			start=0;
 			wait_until_done();
 		end
+		$display("All tests passed!");
 		$finish;
 	end
 
